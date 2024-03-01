@@ -2,12 +2,25 @@
 
 // F U N C T I O N  C O M P O N E N T
 
-function App(){   // uses Capitalized naming convension
-    return (
-        <>
-            <h1>Hello there</h1>
-            <p>This is created using React Component</p>
-        </>
-    )
+function JSx() {
+  // uses Capitalized naming convension
+  return (
+    <>
+      <h1>Hello there</h1>
+      <p>This is created using React Component</p>
+    </>
+  );
 }
-ReactDOM.createRoot(document.getElementById("root")).render(< App />); // component representation
+
+const App = () => {
+  return (
+    <>
+      <h1>JSX using Arrow there</h1>
+      <p>This is created using React Component</p>
+      <JSx />
+    </>
+  );
+};
+
+// Render the App component and pass the JSx component as a prop
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
