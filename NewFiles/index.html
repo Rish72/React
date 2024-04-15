@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- BABEL -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const header = <h1> JSX expression </h1>; //JSX expression
+
+        function sum(){
+            return 10 + 5;
+        }
+
+
+        function App() {
+
+            const obj = {
+                name : "rishabh", 
+                age : 18
+            }
+
+            const cars = ["car1", " ar2", "car3"]
+            const arra = [1, 2, 3, 4, 5, 6, 6]
+            const name = "Demo";
+            const age = 18;
+            const hobby = "JavaScript";
+            const isMarried = false;
+            let newArr = arra.filter((ele) => {
+                        return ele%2==0;
+                     })
+
+            return (
+                <>
+                    <h1>{name}Basic Info</h1>
+                    {header}
+                    <p>{age}</p>
+                    <p>{hobby}</p>
+                    <p>{String (isMarried)}</p>
+                    <p>FUnction calling in jsx {sum()}</p>
+
+                    <p>Using objects in JSX: {obj.name},{obj.age}</p>
+                    {
+                        newArr.map( (ele) => <p>{ele}</p>)
+                    }
+                </>
+            );
+        }
+        
+       const Convertor = () => {
+        const tempInfah = 12;
+        let cel = (tempInfah-32) * (5/9);
+
+        return (
+            <>
+            <p>Temperature in Fahrenheit: {tempInfah}</p>
+            <p>Temperature in Celsius: {cel}</p>
+            </>
+        )
+       }
+
+       ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+
+</html>

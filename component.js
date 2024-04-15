@@ -1,6 +1,6 @@
 // 2 types of components i. FUNCTION BASED, ii. Class based
 
-// F U N C T I O N  C O M P O N E N T
+// F U N C T I O N A L  C O M P O N E N T
 
 function JSx() {
   // uses Capitalized naming convension
@@ -12,7 +12,7 @@ function JSx() {
   );
 }
 
-const App = () => {
+const App = () => { // IMPLICITLY RETURN VALUE
   return (
     <>
       <h1>JSX using Arrow there</h1>
