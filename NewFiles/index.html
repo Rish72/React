@@ -20,7 +20,7 @@
 
         const header = <h1> JSX expression </h1>; //JSX expression
 
-        function sum(){
+        function sum() {
             return 10 + 5;
         }
 
@@ -28,8 +28,8 @@
         function App() {
 
             const obj = {
-                name : "rishabh", 
-                age : 18
+                name: "rishabh",
+                age: 18
             }
 
             const cars = ["car1", " ar2", "car3"]
@@ -39,8 +39,8 @@
             const hobby = "JavaScript";
             const isMarried = false;
             let newArr = arra.filter((ele) => {
-                        return ele%2==0;
-                     })
+                return ele % 2 == 0;
+            })
 
             return (
                 <>
@@ -48,30 +48,79 @@
                     {header}
                     <p>{age}</p>
                     <p>{hobby}</p>
-                    <p>{String (isMarried)}</p>
+                    <p>{String(isMarried)}</p>
                     <p>FUnction calling in jsx {sum()}</p>
 
                     <p>Using objects in JSX: {obj.name},{obj.age}</p>
                     {
-                        newArr.map( (ele) => <p>{ele}</p>)
+                        newArr.map((ele, index) => <p key={index}>{ele}</p>)
                     }
                 </>
             );
         }
-        
-       const Convertor = () => {
-        const tempInfah = 12;
-        let cel = (tempInfah-32) * (5/9);
 
-        return (
-            <>
-            <p>Temperature in Fahrenheit: {tempInfah}</p>
-            <p>Temperature in Celsius: {cel}</p>
-            </>
-        )
-       }
+        const Convertor = () => {
+            const tempInfah = 12;
+            let cel = (tempInfah - 32) * (5 / 9);
 
-       ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+            return (
+                <>
+                    <p>Temperature in Fahrenheit: {tempInfah}</p>
+                    <p>Temperature in Celsius: {cel}</p>
+                </>
+            )
+        }
+
+
+        const TableOfStudent = () => {
+            const StudentData = [
+                {
+                    name: "Student1",
+                    age: 12,
+                    marks: 324
+                },
+                {
+                    name: "Student2",
+                    age: 22,
+                    marks: 434
+                },
+                {
+                    name: "Student3",
+                    age: 20,
+                    marks: 343
+                },
+                {
+                    name: "Student4",
+                    age: 15,
+                    marks: 534
+                }
+            ]
+
+            return (
+                <>
+                    <h1>Student details</h1>
+                    <table border="1px">
+                        <thead>
+                            <tr >
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                StudentData.map((student, index) => (
+                                    (<tr> key={index}<td>{student.name}</td><td>{student.age}</td><td>{student.marks}</td></tr>)
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </>
+            )
+
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<TableOfStudent />);
     </script>
 </body>
 
