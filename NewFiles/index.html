@@ -124,21 +124,21 @@
             const carData = [
                 {
                     name: "Car 1",
-                    avg : 23,
-                    imgUrl : "https://img.pikbest.com/png-images/qiantu/hand-drawn-cartoon-red-car-png-element_2652097.png!w700wp"
+                    avg: 23,
+                    imgUrl: "https://img.pikbest.com/png-images/qiantu/hand-drawn-cartoon-red-car-png-element_2652097.png!w700wp"
                 },
                 {
                     name: "Car 2",
-                    avg : 15,
-                    imgUrl : "https://img.pikbest.com/png-images/qiantu/hand-drawn-cartoon-red-car-png-element_2652097.png!w700wp"
+                    avg: 15,
+                    imgUrl: "https://img.pikbest.com/png-images/qiantu/hand-drawn-cartoon-red-car-png-element_2652097.png!w700wp"
                 },
                 {
                     name: "Car 3",
-                    avg : 12,
-                    imgUrl : "https://img.pikbest.com/png-images/qiantu/hand-drawn-cartoon-red-car-png-element_2652097.png!w700wp"
+                    avg: 12,
+                    imgUrl: "https://img.pikbest.com/png-images/qiantu/hand-drawn-cartoon-red-car-png-element_2652097.png!w700wp"
                 },
             ]
-            
+
             return (
                 <>
                     <h1>Cars details</h1>
@@ -153,7 +153,7 @@
                         <tbody>
                             {
                                 carData.map((car, index) => (
-                                    (<tr><td>{car.name}</td><td>{car.avg}</td><td><img  src={car.imgUrl} width="50"></img></td></tr>)
+                                    (<tr><td>{car.name}</td><td>{car.avg}</td><td><img src={car.imgUrl} width="50"></img></td></tr>)
                                 ))
                             }
                         </tbody>
@@ -164,16 +164,34 @@
 
         }
 
+        const ChangeName = () => {
+            // const isLogged = false;
+            // const user = "Alexa";
+            // if(isLogged) return <h1> hey There {user} </h1>
+            // else return (
+            //     <h1> hey There User </h1>   
+            // )
+
+            // const isLogged = true;
+            // const user = "Alexa";
+
+            // return isLogged ? <h1>Hey There {user}</h1> : <h1>Hey There User</h1>;
+
+            let isLogged = true;
+             return (
+                <h1>Hello There, {isLogged ? "Alexa" : "User"}</h1>
+             )
+        }
 
         const App = () => {
 
             //CONDITIONAL RENDERING
-            let showCars = true
-            if(showCars) return <CarDataTable />
+            // let showCars = true
+            // if(showCars) return <CarDataTable />
             return (
-               <>
-                <TableOfStudent />
-               </>
+                <>
+                    <ChangeName />
+                </>
             )
         }
 
