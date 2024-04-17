@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- BABEL -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>Score Keeper</title>
+</head>
+
+<body>
+
+    <div id="root" style="text-align: center;"></div>
+
+    <script type="text/babel">
+        let score = 0;
+        let wicket = 0;
+
+        function clickOne() {
+            score =  score + 1;
+            console.log(score);
+            //re render if you want to make changes to the UI
+            rootEle.render(<App />)
+        }
+
+        const App = () => {
+            return (
+                <>
+                    <h1>Score Keeper</h1>
+                    <h2>SCORE : {score} / {wicket}</h2>
+                    <button onClick={clickOne}>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                    <button>6</button>
+                    <button>Wicket</button>
+                </>
+            )
+        }
+
+        const rootEle = ReactDOM.createRoot(document.getElementById("root"))
+        rootEle.render(<App />)
+    </script>
+
+</body>
+
+</html>
