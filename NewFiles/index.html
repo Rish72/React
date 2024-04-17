@@ -177,10 +177,24 @@
 
             // return isLogged ? <h1>Hey There {user}</h1> : <h1>Hey There User</h1>;
 
+            //&& RETURNS YOU THE LAST TRUTHY VALUE AND THE FIRST FALSY VALUE that's why it is returning para
             let isLogged = true;
-             return (
-                <h1>Hello There, {isLogged ? "Alexa" : "User"}</h1>
-             )
+            /* return (
+                <>
+                    <h1>Hello There, {isLogged ? "Alexa" : "User"}</h1>
+                    {isLogged && <p>Welcome to the portal</p>}
+                </>
+            ) */
+
+            // using OR operator
+            let firstName = "alexa"
+            let lastName = "diaz"
+            return (
+                <>
+                    <h1>Hello There, {isLogged ? lastName || FirstName : "User"}</h1>
+                    {isLogged && <p>Welcome to the portal</p>}
+                </>
+            )
         }
 
         const App = () => {
