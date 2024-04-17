@@ -19,26 +19,60 @@
     <script type="text/babel">
         let score = 0;
         let wicket = 0;
+        let ballWiseRes = [];
 
-        function clickOne() {
-            score =  score + 1;
-            console.log(score);
+        function addScore(val) {
+            if (wicket < 10) {
+                ballWiseRes.push(val)
+                score = score + val;
+                console.log(ballWiseRes);
+            }
             //re render if you want to make changes to the UI
             rootEle.render(<App />)
         }
+
+        function addWicket(val) {
+
+            if (wicket < 10) {
+                ballWiseRes.push("W")
+                wicket += val
+            }
+            rootEle.render(<App />)
+            console.log(ballWiseRes);
+        }
+
+        const ScoreButtons = () => {
+            return <div>
+                <button onClick={() => addScore(0)}>0</button>
+                <button onClick={() => addScore(1)}>1</button>
+                <button onClick={() => addScore(2)} >2</button>
+                <button onClick={() => addScore(3)} >3</button>
+                <button onClick={() => addScore(4)} >4</button>
+                <button onClick={() => addScore(6)} >6</button>
+                <button onClick={() => addWicket(1)}>Wicket</button>
+            </div>
+        }
+
+        const Result = () => (
+            <div>
+                {ballWiseRes.map((res, index) => (
+                    <>
+                        {index % 6 === 0 ? <br /> : null}
+                        {res === "W" ? <span style={{ color: "red" }}>{res}</span> : <span key={index}>{res + " "}</span>}
+
+                    </>
+                ))}
+            </div>
+        )
+
 
         const App = () => {
             return (
                 <>
                     <h1>Score Keeper</h1>
                     <h2>SCORE : {score} / {wicket}</h2>
-                    <button onClick={clickOne}>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                    <button>6</button>
-                    <button>Wicket</button>
+                    <ScoreButtons />
+                    <Result />
                 </>
             )
         }
