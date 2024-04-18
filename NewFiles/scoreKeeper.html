@@ -66,13 +66,30 @@
         )
 
 
+        function preventDefault (e) {
+            e.preventDefault();
+        }
+        //  FORMS IN REACT
+
+        const Form = () => 
+        // to prevent default behaviour we use Synthetic events which is a wrapper around the event
+        (
+            <form onSubmit = {preventDefault}>
+
+                <input />
+                <input />
+                <button>submit</button>
+            </form>
+        )
+
+
         const App = () => {
             return (
                 <>
                     <h1>Score Keeper</h1>
                     <h2>SCORE : {score} / {wicket}</h2>
                     <ScoreButtons />
-                    <Result />
+                    <Form />
                 </>
             )
         }
