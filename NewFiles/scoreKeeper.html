@@ -20,25 +20,30 @@
         let score = 0;
         let wicket = 0;
         let ballWiseRes = [];
+        let hit = 0;
+        let inputRef = React.createRef();
 
         function addScore(val) {
-            if (wicket < 10) {
-                ballWiseRes.push(val)
-                score = score + val;
-                console.log(ballWiseRes);
-            }
+            // if (wicket < 10) {
+            //     ballWiseRes.push(val)
+            //     score = score + val;
+            //     console.log(ballWiseRes);
+            // }
+
+            hit = val;
+
             //re render if you want to make changes to the UI
             rootEle.render(<App />)
         }
 
         function addWicket(val) {
 
-            if (wicket < 10) {
-                ballWiseRes.push("W")
-                wicket += val
-            }
+            // if (wicket < 10) {
+            //     ballWiseRes.push("W")
+            //     wicket += val
+            // }
+            hit = "W";
             rootEle.render(<App />)
-            console.log(ballWiseRes);
         }
 
         const ScoreButtons = () => {
@@ -66,20 +71,46 @@
         )
 
 
-        function preventDefault (e) {
+        function handleSubmit(e) {
             e.preventDefault();
+            let type = e.type;
+            console.log("type : "+type);
+          if(hit == "W"){
+            wicket += 1;
+          }else {
+            score += hit;
+          }
+          
+            ballWiseRes.unshift(
+                //<span>{hit}{" , "}{inputRef.current.value}</span>
+                <span>{`${hit}, ${inputRef.current.value}`}</span>
+            ); // input value in the starting
+
+            hit = 0;
+            inputRef.current.value = "";
+            rootEle.render(<App />)
         }
         //  FORMS IN REACT
 
-        const Form = () => 
+        const Form = () =>
         // to prevent default behaviour we use Synthetic events which is a wrapper around the event
         (
-            <form onSubmit = {preventDefault}>
+            <>
+                <br />
+                <form onSubmit={handleSubmit}>
+                    <input value={hit} />
+                    <input ref={inputRef}/>
+                    <button>submit</button>
+                </form>
+                <hr />
 
-                <input />
-                <input />
-                <button>submit</button>
-            </form>
+                {ballWiseRes.map((ball, index) => (
+                    <p key={index}>{ball}</p>
+                ))}
+
+                <hr />
+
+            </>
         )
 
 
