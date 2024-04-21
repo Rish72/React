@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .App {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+
+        form {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        form div {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button {
+            width: 120px;
+            padding-block: 5px;
+            cursor: pointer;
+        }
+
+        th,
+        td {
+            padding: 10px;
+        }
+
+        input {
+            padding: 5px;
+            font-size: 1.1rem;
+        }
+
+        .served {
+            background-color: red;
+        }
+
+        .dining {
+            background-color: lime;
+            cursor: pointer;
+        }
+    </style>
+    <title>React App</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        let guestCount = React.createRef();
+        let guest = React.createRef();
+        let phoneNum = React.createRef();
+
+
+        let count, name, phone;
+        let checkInTime = "12:45 PM";
+        let customers = [
+            {
+                count: 5,
+                name: "Rishi",
+                phone: 7906058986,
+                checkInTime: "12:00 PM",
+            },
+        ];
+        const capacity = 25;
+        let seatsLeft = 25;
+
+        const clearInput = () => {
+            guestCount.current.value ="";
+            guest.current.value="";
+            phoneNum.current.value ="";
+            rootElement.render(<App/>)
+        }
+        // Create form submit handler here
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            count = guestCount.current.value ;
+            name = guest.current.value;
+            phone = phoneNum.current.value;
+
+            customers.push({ count, name, phone, checkInTime })
+            seatsLeft -= count;
+            clearInput();
+
+            rootElement.render(<App />)
+
+        }
+
+        const handleDelete = () => {
+            customers.pop();
+            rootElement.render(<App />)
+        }
+
+        const Form = () => (
+            // onSubmit={handleSubmit}
+            <>
+                <form onSubmit={handleSubmit}>
+                    <input type="number" placeholder="Guest Count" ref={guestCount} />
+                    <input name="" id="" placeholder="Primary Guest Name" ref={guest} />
+                    <input name="" id="" placeholder="Phone number" ref={phoneNum} />
+                    <button>Add Entry</button>
+                </form>
+            </>
+        )
+
+        const App = () => (
+            <div className="App" style={{ textAlign: "center" }}>
+                <div>
+                    <h2>Total Capacity: {`${capacity}`}</h2>
+                    <h2>Seats Left: {`${seatsLeft}`}</h2>
+                </div>
+
+                <Form />
+
+                {/* Complete table to show records of customers */}
+                <table border="1px" style={{ margin: "auto" }}>
+                    <thead>
+                        <tr>
+                            <th>Count</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Check In</th>
+                            <th>Check out</th>
+                            <th>Status</th>
+                            <th>Remove Entry</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {customers.map((cust, i) => (
+                            <tr key={i}>
+                                <td>{cust.count}</td>
+                                <td>{cust.name}</td>
+                                <td>{cust.phone}</td>
+                                <td>{checkInTime}</td>
+                                <td>Check out time not displayed yes</td>
+                                <td>Click to check out</td>
+                                <td style={{ cursor: "pointer" }} onClick={handleDelete}>Click to Remove/Delete</td>
+                            </tr>
+                        ))}
+
+                    </tbody>
+
+                </table>
+            </div >
+        );
+
+        const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+        rootElement.render(<App />);
+    </script>
+
+</body>
+
+</html>
