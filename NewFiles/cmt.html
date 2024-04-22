@@ -62,38 +62,42 @@
         let guestCount = React.createRef();
         let guest = React.createRef();
         let phoneNum = React.createRef();
+        let checkIn;
+        let checkInTime, checkOut = "-";
+        console.log(checkInTime);
 
-
+        let customers = [];
         let count, name, phone;
-        let checkInTime = "12:45 PM";
-        let customers = [
-            {
-                count: 5,
-                name: "Rishi",
-                phone: 7906058986,
-                checkInTime: "12:00 PM",
-            },
-        ];
+
+        function updateTime() {
+            const date = new Date();
+            checkInTime = date.toLocaleTimeString();
+        }
+        setInterval(updateTime, 1000);
+
         const capacity = 25;
-        let seatsLeft = 25;
+        let seatsLeft = capacity;
 
         const clearInput = () => {
-            guestCount.current.value ="";
-            guest.current.value="";
-            phoneNum.current.value ="";
-            rootElement.render(<App/>)
+            guestCount.current.value = "";
+            guest.current.value = "";
+            phoneNum.current.value = "";
+            rootElement.render(<App />)
         }
         // Create form submit handler here
 
         const handleSubmit = (e) => {
             e.preventDefault();
-            count = guestCount.current.value ;
-            name = guest.current.value;
-            phone = phoneNum.current.value;
+            count = guestCount.current.value;
+            if (seatsLeft != 0 && seatsLeft >= count) {
+                name = guest.current.value;
+                phone = phoneNum.current.value;
+                checkIn = checkInTime; updateTime();
 
-            customers.push({ count, name, phone, checkInTime })
-            seatsLeft -= count;
-            clearInput();
+                customers.push({ count, name, phone, checkIn })
+                seatsLeft -= count;
+                clearInput();
+            }
 
             rootElement.render(<App />)
 
@@ -101,6 +105,14 @@
 
         const handleDelete = () => {
             customers.pop();
+            if (customers.length == 0) {
+                seatsLeft = capacity;
+            }
+            rootElement.render(<App />)
+        }
+
+        const handleCheckOut = () => {
+            checkOut = checkInTime;
             rootElement.render(<App />)
         }
 
@@ -145,9 +157,9 @@
                                 <td>{cust.count}</td>
                                 <td>{cust.name}</td>
                                 <td>{cust.phone}</td>
-                                <td>{checkInTime}</td>
-                                <td>Check out time not displayed yes</td>
-                                <td>Click to check out</td>
+                                <td>{cust.checkIn}</td>
+                                <td>{`${checkOut}`}</td>
+                                <td style={{ cursor: "pointer" }} onClick={handleCheckOut}>Click to check out</td>
                                 <td style={{ cursor: "pointer" }} onClick={handleDelete}>Click to Remove/Delete</td>
                             </tr>
                         ))}
