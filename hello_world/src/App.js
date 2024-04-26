@@ -1,5 +1,6 @@
 import React from "react";
 
+// FUNCTIONAL COMPONENT
 // function App() {
 //   return (
 //    <h1>Hello World From React</h1>
@@ -7,9 +8,9 @@ import React from "react";
 // }
 
 // export default App;
+
+
 // Class component
-
-
 class App extends React.Component{
 
   render() {

@@ -8,8 +8,19 @@ class MovieCard extends Component {
       plot : " A man who gets bitten by a spider acquires power of a spider and becomes superhuman" , 
       price : 120,
       rating : 8.9,
-      stars : 0
+      stars : 0,
+      fav: true
     } 
+  }
+
+  decStars = () => {
+    if(this.state.stars > 0){
+      this.setState( {
+        stars: this.state.stars -+ 0.5
+      })
+    }else {
+      return;
+    }
   }
 
   addStars () {
@@ -19,11 +30,15 @@ class MovieCard extends Component {
     // })
 
     // form 2 -- works on previous State whatever the state was it changes that 
-    this.setState((prevState) => {
-      return{
-        stars : prevState.stars+0.5
-      }
-    })
+    if(this.state.stars < 5){
+      this.setState((prevState) => {
+        return{
+          stars : prevState.stars+0.5
+        }
+      })
+    }else {
+      return;
+    }
 
 
     // this.state.stars += 0.5;
@@ -33,9 +48,17 @@ class MovieCard extends Component {
   // addStars = () => {
   //   console.log(this.state);
   // }
+
+
+  handleClick = () => {
+    this.setState({
+      fav : !this.state.fav
+    })
+  }
+
   //making state
   render() {
-    const {title, plot, price , rating, stars} = this.state;
+    const {title, plot, price , rating, stars, fav} = this.state;
     return (
       <div className="main">
         <div className="movie-card">
@@ -56,6 +79,7 @@ class MovieCard extends Component {
               <div className="star-dis">
                 <img
                   alt="decrease"
+                  onClick={this.decStars}
                   className="str-btn"
                   src="https://cdn-icons-png.flaticon.com/128/2801/2801932.png"
                 />
@@ -71,7 +95,7 @@ class MovieCard extends Component {
                 />
                 <span> {stars} </span>
               </div>
-              <button className="favourite-btn">Fav</button>
+              <button onClick={this.handleClick} className={fav?"favourite-btn" : "unfavourite-btn"}>{fav?"Favourite" : "Unfavourite"}</button>
               <button className="cart-btn">Add to cart</button>
             </div>
           </div>
