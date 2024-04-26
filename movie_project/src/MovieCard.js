@@ -9,7 +9,8 @@ class MovieCard extends Component {
       price : 120,
       rating : 8.9,
       stars : 0,
-      fav: true
+      fav: true,
+      isAdd : true
     } 
   }
 
@@ -50,15 +51,21 @@ class MovieCard extends Component {
   // }
 
 
-  handleClick = () => {
+  handleFav = () => {
     this.setState({
       fav : !this.state.fav
     })
   }
 
+  handleCart = () => {
+    this.setState ({
+      isAdd : !this.state.isAdd
+    })
+  }
+
   //making state
   render() {
-    const {title, plot, price , rating, stars, fav} = this.state;
+    const {title, plot, price , rating, stars, fav, isAdd} = this.state;
     return (
       <div className="main">
         <div className="movie-card">
@@ -95,8 +102,8 @@ class MovieCard extends Component {
                 />
                 <span> {stars} </span>
               </div>
-              <button onClick={this.handleClick} className={fav?"favourite-btn" : "unfavourite-btn"}>{fav?"Favourite" : "Unfavourite"}</button>
-              <button className="cart-btn">Add to cart</button>
+              <button onClick={this.handleFav} className={fav?"unfavourite-btn" : "favourite-btn"}>{fav?"Unfavourite" : "Favourite"}</button>
+              <button onClick={this.handleCart} className={isAdd?"remove-cart-btn" : "cart-btn"}>{isAdd?"Remove from Cart" : "Add to Cart"}</button>
             </div>
           </div>
         </div>
