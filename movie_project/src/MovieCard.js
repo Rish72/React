@@ -9,8 +9,8 @@ class MovieCard extends Component {
       price : 120,
       rating : 8.9,
       stars : 0,
-      fav: true,
-      isAdd : true
+      fav: false,
+      isCarted : false
     } 
   }
 
@@ -59,13 +59,13 @@ class MovieCard extends Component {
 
   handleCart = () => {
     this.setState ({
-      isAdd : !this.state.isAdd
+      isCarted : !this.state.isCarted
     })
   }
 
   //making state
   render() {
-    const {title, plot, price , rating, stars, fav, isAdd} = this.state;
+    const {title, plot, price , rating, stars, fav, isCarted} = this.state;
     return (
       <div className="main">
         <div className="movie-card">
@@ -103,7 +103,7 @@ class MovieCard extends Component {
                 <span> {stars} </span>
               </div>
               <button onClick={this.handleFav} className={fav?"unfavourite-btn" : "favourite-btn"}>{fav?"Unfavourite" : "Favourite"}</button>
-              <button onClick={this.handleCart} className={isAdd?"remove-cart-btn" : "cart-btn"}>{isAdd?"Remove from Cart" : "Add to Cart"}</button>
+              <button onClick={this.handleCart} className={isCarted?"remove-cart-btn" : "cart-btn"}>{isCarted?"Remove from Cart" : "Add to Cart"}</button>
             </div>
           </div>
         </div>

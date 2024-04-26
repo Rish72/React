@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import MovieCard from './MovieCard';
+import MovieList from './movieList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
-    <MovieCard />
+    <MovieList />
   </React.StrictMode>
 );
 
