@@ -45,16 +45,12 @@ class MovieCard extends Component {
     })
   }
 
-  handleCart = () => {
-    this.setState ({
-      isCarted : !this.state.isCarted
-    })
-  }
+
 
   //making state
   render() {
+    const {movies, handleIncStar, handleDecStar, handleCart} = this.props;
     const {title, plot, price , rating, stars, src,fav, isCarted} = this.props.movies;
-    console.log(this.props.movies[1]);
     return (
       <div className="main">
         <div className="movie-card">
@@ -75,7 +71,7 @@ class MovieCard extends Component {
               <div className="star-dis">
                 <img
                   alt="decrease"
-                  onClick={this.decStars}
+                  onClick={() => handleDecStar(movies)}
                   className="str-btn"
                   src="https://cdn-icons-png.flaticon.com/128/2801/2801932.png"
                 />
@@ -86,13 +82,13 @@ class MovieCard extends Component {
                 />
                 <img
                   alt="increase"
-                  className="str-btn" onClick={this.addStars.bind(this)}
+                  className="str-btn" onClick={() => handleIncStar(movies)}
                   src="https://cdn-icons-png.flaticon.com/128/1828/1828925.png"
                 />
                 <span> {stars} </span>
               </div>
               <button onClick={this.handleFav} className={fav?"unfavourite-btn" : "favourite-btn"}>{fav?"Unfavourite" : "Favourite"}</button>
-              <button onClick={this.handleCart} className={isCarted?"remove-cart-btn" : "cart-btn"}>{isCarted?"Remove from Cart" : "Add to Cart"}</button>
+              <button onClick={()=> handleCart(movies)} className={isCarted?"remove-cart-btn" : "cart-btn"}>{isCarted?"Remove from Cart" : "Add to Cart"}</button>
             </div>
           </div>
         </div>
