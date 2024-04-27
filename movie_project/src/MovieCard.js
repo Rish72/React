@@ -1,18 +1,6 @@
 import { Component } from "react";
 
 class MovieCard extends Component { 
-  constructor(){
-    super();
-    this.state = {
-      title : "SpiderMan",
-      plot : " A man who gets bitten by a spider acquires power of a spider and becomes superhuman" , 
-      price : 120,
-      rating : 8.9,
-      stars : 0,
-      fav: false,
-      isCarted : false
-    } 
-  }
 
   decStars = () => {
     if(this.state.stars > 0){
@@ -65,14 +53,15 @@ class MovieCard extends Component {
 
   //making state
   render() {
-    const {title, plot, price , rating, stars, fav, isCarted} = this.state;
+    const {title, plot, price , rating, stars, src,fav, isCarted} = this.props.movies;
+    console.log(this.props.movies[1]);
     return (
       <div className="main">
         <div className="movie-card">
           <div className="left">
             <img
               alt="poster"
-              src="https://images.unsplash.com/photo-1635805737707-575885ab0820?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src={src}
             />
           </div>
           <div className="right">
