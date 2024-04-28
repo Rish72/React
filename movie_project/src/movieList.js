@@ -51,39 +51,37 @@ class MovieList extends Component {
   }
 
   handleFav = (movie) => {
-    const {movies} =   this.state;
+    const { movies } = this.state;
     const movInd = movies.indexOf(movie);
 
     movies[movInd].fav = !movies[movInd].fav;
     this.setState({
-      movies : movies
-    })
-  }
+      movies: movies,
+    });
+  };
 
-
-  handleCart = (movie) => { 
-    const {movies} = this.state;
-    const movIndex = movies.indexOf(movie)
+  handleCart = (movie) => {
+    const { movies } = this.state;
+    const movIndex = movies.indexOf(movie);
 
     movies[movIndex].isCarted = !movies[movIndex].isCarted;
     console.log(movies[movIndex].isCarted);
-    this.setState ({
-      movies // short hand
-    })
-  }
+    this.setState({
+      movies, // short hand
+    });
+  };
 
   handleDecStar = (movie) => {
-    const {movies} = this.state;
-    const movIndex = movies.indexOf(movie)
+    const { movies } = this.state;
+    const movIndex = movies.indexOf(movie);
 
-    if(movies[movIndex].stars > 0){
+    if (movies[movIndex].stars > 0) {
       movies[movIndex].stars -= 0.5;
       this.setState({
-        movies : movies
-      })
+        movies: movies,
+      });
     }
-  }
-
+  };
 
   handleIncStar = (movie) => {
     const { movies } = this.state;
@@ -94,12 +92,19 @@ class MovieList extends Component {
       this.setState({
         movies: movies, //{state} : {local copy}
       });
-    }else return;
+    } else return;
   };
 
   render() {
     let listItems = this.state.movies.map((item, ind) => (
-      <MovieCard key={ind} movies={item} handleIncStar={this.handleIncStar} handleDecStar={this.handleDecStar} handleCart={this.handleCart} handleFav={this.handleFav}/>
+      <MovieCard
+        key={ind}
+        movies={item}
+        handleIncStar={this.handleIncStar}
+        handleDecStar={this.handleDecStar}
+        handleCart={this.handleCart}
+        handleFav={this.handleFav}
+      />
     ));
 
     return <>{listItems};</>;
