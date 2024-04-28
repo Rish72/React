@@ -50,15 +50,25 @@ class MovieList extends Component {
     };
   }
 
-  handleCart = (movie) => {
-    console.log("handle crt triggered");
+  handleFav = (movie) => {
+    const {movies} =   this.state;
+    const movInd = movies.indexOf(movie);
+
+    movies[movInd].fav = !movies[movInd].fav;
+    this.setState({
+      movies : movies
+    })
+  }
+
+
+  handleCart = (movie) => { 
     const {movies} = this.state;
     const movIndex = movies.indexOf(movie)
 
     movies[movIndex].isCarted = !movies[movIndex].isCarted;
     console.log(movies[movIndex].isCarted);
     this.setState ({
-      movies
+      movies // short hand
     })
   }
 
@@ -89,7 +99,7 @@ class MovieList extends Component {
 
   render() {
     let listItems = this.state.movies.map((item, ind) => (
-      <MovieCard key={ind} movies={item} handleIncStar={this.handleIncStar} handleDecStar={this.handleDecStar} handleCart={this.handleCart}/>
+      <MovieCard key={ind} movies={item} handleIncStar={this.handleIncStar} handleDecStar={this.handleDecStar} handleCart={this.handleCart} handleFav={this.handleFav}/>
     ));
 
     return <>{listItems};</>;
