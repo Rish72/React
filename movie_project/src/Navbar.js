@@ -22,6 +22,11 @@ const Nav = styled.div`
 
 const Title = styled.h1`
   margin: 0;
+  transition : all 0.2s;
+  &:hover {
+    cursor : Pointer;
+    opacity : 0.5;
+  }
 `;
 
 const Cart = styled.div`
@@ -35,11 +40,14 @@ const CartImg = styled.img`
 `;
 
 const CartSpan = styled.span`
+  visibility : ${(props) => props.show ? "visible" : "hidden"};
   position: absolute;
-  background-color: green;
-  width: 15px;
+  color: black;
+  font-size : 12px;
+  border-radius: 50%;
+  background-color: ${(props) => props.color};
+  padding  : 2px 8px;
   text-align: center;
-  border-radius: 100%;
   right: -1px;
   top: -2px;
 `;
@@ -56,7 +64,7 @@ function NavBar() {
             src="https://cdn-icons-png.flaticon.com/128/2838/2838895.png"
             alt="Cart"
           />
-          <CartSpan>0</CartSpan>
+          <CartSpan color="yellow" show={true}>0</CartSpan>
         </Cart>
       </Nav>
     </>
