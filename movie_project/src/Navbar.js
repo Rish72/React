@@ -52,7 +52,9 @@ const CartSpan = styled.span`
   top: -2px;
 `;
 
-function NavBar() {
+function NavBar(props) {
+  let {cartItemCount} = props; 
+  console.log("in nav "+cartItemCount);
   return (
     <>
       <Nav>
@@ -64,7 +66,7 @@ function NavBar() {
             src="https://cdn-icons-png.flaticon.com/128/2838/2838895.png"
             alt="Cart"
           />
-          <CartSpan color="yellow" show={true}>0</CartSpan>
+          <CartSpan color="yellow" show={true}>{cartItemCount}</CartSpan>
         </Cart>
       </Nav>
     </>
