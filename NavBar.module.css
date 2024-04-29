@@ -1,0 +1,48 @@
+.navBar {
+  box-sizing: border-box;
+  color: white;
+  height: 50px;
+  overflow: hidden;
+  width: 100%;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    149deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 41%,
+    rgba(0, 212, 255, 1) 100%
+  );
+
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.title{
+    margin: 0;
+    transition : all 0.2s;
+}
+.title:hover {
+    cursor : Pointer;
+    opacity : 0.5;
+  }
+
+.cart{
+    box-sizing: border-box;
+  cursor: Pointer;
+  position: relative;
+}
+
+.cartImg{
+    height: 40px;
+}
+.cartSpan{
+    position: absolute;
+    color: black;
+    font-size : 12px;
+    border-radius: 50%;
+    background-color:yellow;
+    padding  : 2px 8px;
+    text-align: center;
+    right: -1px;
+    top: -2px;
+}
