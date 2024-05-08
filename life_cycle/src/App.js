@@ -1,11 +1,11 @@
 import { Component } from "react";
-import ComponentA from "./ComponentA";
+import Timer1 from "./Timer/Timer1";
 
 class App extends Component {
   render() {
     return (
       <>
-        <ComponentA />
+        < Timer1/>
       </>
     );
   }

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import ComponentB from "./ComponentB";
+import ComponentB from "./Componets/ComponentB";
 class ComponentA extends Component {
   constructor() {
     super();
