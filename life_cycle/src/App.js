@@ -1,6 +1,8 @@
 import { Component } from "react";
-import Timer2 from "./Timer/Timer2";
-import Timer1 from "./Timer/Timer1";
+// import Timer2 from "./Timer/Timer2";
+// import Timer1 from "./Timer/Timer1";
+import ComponentA from "./Componets/ComponentA";
+import ErrorBoundaries from "./Componets/ErrorBoundaries";
 
 class App extends Component {
   constructor(props) {
@@ -17,9 +19,13 @@ class App extends Component {
   render() {
     return (
       <>
-        <Timer1  timerOn={this.state.timerOn} />
+        {/* <Timer1  timerOn={this.state.timerOn} />
 
-        <button onClick={this.handleTimerOn}> {this.state.timerOn ? "STOP" : "Start"}</button> 
+        <button onClick={this.handleTimerOn}> {this.state.timerOn ? "STOP" : "Start"}</button>  */}
+
+        <ErrorBoundaries>
+          <ComponentA />
+        </ErrorBoundaries>
       </>
     );
   }

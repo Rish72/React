@@ -1,5 +1,5 @@
 import { Component } from "react";
-import ComponentB from "./Componets/ComponentB";
+// import ComponentB from "./Componets/ComponentB";
 class ComponentA extends Component {
   constructor() {
     super();
@@ -16,7 +16,7 @@ class ComponentA extends Component {
   }
 
   componentDidMount() { 
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("https://jsonplaceholder.typicode.com/user")
       .then((response) => response.json())
       .then(data => {
         this.setState({
@@ -33,7 +33,7 @@ class ComponentA extends Component {
       <>
         <h1>{this.state.name}</h1>
 
-        <ComponentB userData={this.state.userData}/>
+        {/* <ComponentB userData={this.state.userData}/> */}
         <ul>
             {this.state.userData.map((data) => {
              return(
