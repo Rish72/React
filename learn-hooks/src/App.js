@@ -1,10 +1,9 @@
-import InputComp from "./Components/InputComp";
-import InputWithClass from "./Components/InputWithClass";
+import TimerComponent from "./Components/TimerComponent";
 
 function App() {
   return (
     <>
-      <InputComp />
+    <TimerComponent />
     </>
   );
 }
