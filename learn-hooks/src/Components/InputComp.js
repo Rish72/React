@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { useState } from "react";
+
 const Section = styled.div`
   width: 100vw;
   display: flex;
@@ -13,16 +15,20 @@ const Section = styled.div`
 `;
 
 function InputComp() {
+
+  const [name , setName] = useState("");  //initailly ye naam name ko milega input fields ko set krne ke bd jo bhi data aayega vo name me assign hoga
+  const [lastname , setLastName] = useState(""); 
+
   return (
     <>
       <Section>
         <Row label="Name">
-          <input />
+          <input value={name} onChange={(e) => setName(e.target.value)}/>
         </Row>
         <Row label="Name">
-          <input />
+          <input value={lastname} onChange={e => setLastName(e.target.value)}/>
         </Row>
-        <h1> hello React</h1>
+        <h1> hello React {name+" "+lastname} </h1>
       </Section>
     </>
   );
