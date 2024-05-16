@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Section = styled.div`
   width: 100vw;
@@ -18,6 +18,10 @@ function InputComp() {
 
   const [name , setName] = useState("");  //initailly ye naam name ko milega input fields ko set krne ke bd jo bhi data aayega vo name me assign hoga
   const [lastname , setLastName] = useState(""); 
+
+  useEffect(() => { // currently acting like a componentDidMount and componentDidUpdate
+    document.title = name+" "+lastname;
+  }, [name]) // agar dependency me ek empty array dedi to componentDidMount ki taraf kaam krega mtlb initial stage pe jo bhi value hogi ho rahga or agar componentDidUpdate ki taraf kaam karana h to koi condition deni pdegi
 
   return (
     <>
