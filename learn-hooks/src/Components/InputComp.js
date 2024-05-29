@@ -23,6 +23,15 @@ function InputComp() {
     document.title = name+" "+lastname;
   }, [name]) // agar dependency me ek empty array dedi to componentDidMount ki taraf kaam krega mtlb initial stage pe jo bhi value hogi ho rahga or agar componentDidUpdate ki taraf kaam karana h to koi condition deni pdegi
 
+  useEffect(() =>{
+    let timer = setInterval(() => {
+      console.log("Window width: ", window.innerWidth);
+    }, 2000);
+
+
+    return(clearInterval(timer))
+  })
+
   return (
     <>
       <Section>
