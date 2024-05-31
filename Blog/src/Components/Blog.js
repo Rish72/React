@@ -1,9 +1,9 @@
 //Blogging App using Hooks
-import { useState, useTransition } from "react";
+import { useState, useRef } from "react";
 
 export default function Blog() {
-  // const [Title, setTitle] = useState("");
-  // const [content, setContent] = useState("");
+
+  const titleRef= useRef(null);
 
   const [formData, setFormData] = useState({ title: "", content: "" });
   const [blogs, setBlogs] = useState([]);
@@ -13,6 +13,7 @@ export default function Blog() {
     e.preventDefault();
     setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
     setFormData({ title: "", content: "" });
+    titleRef.current.focus();
   }
 
   function removeBlog(i) {
@@ -33,6 +34,7 @@ export default function Blog() {
             <input
               className="input"
               value={formData.title}
+              ref={titleRef}
               onChange={(e) => {
                 setFormData({
                   title: e.target.value,
