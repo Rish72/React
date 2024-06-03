@@ -1,27 +1,42 @@
 //Blogging App using Hooks
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useReducer } from "react";
 
+function blogReducer(state, action) {
+
+  switch(action.type){
+    case "ADD" : return [action.blog , ...state]
+    case "DELETE" : return state.filter((blog, index) => index !== action.index);
+    default : return []
+  }
+
+}
 export default function Blog() {
   const titleRef = useRef(null);
 
   const [formData, setFormData] = useState({ title: "", content: "" });
-  const [blogs, setBlogs] = useState([]);
-  let [top , setTop] = useState(null);
+  // const [blogs, setBlogs] = useState([]);
+  const [blogs, dispatch] = useReducer(blogReducer, []);
+  let [top, setTop] = useState(null);
 
   //Passing the synthetic event as argument to stop refreshing the page on submit
   function handleSubmit(e) {
     e.preventDefault();
-    setTop(top = formData.title) 
-    console.log(top);
-    setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
+    setTop((top = formData.title));
+    //setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
+
+    dispatch({
+      type: "ADD",
+      blog: { title: formData.title, content: formData.content },
+    });
+
     setFormData({ title: "", content: "" });
     titleRef.current.focus();
   }
 
   useEffect(() => {
-    if (blogs.length <= 0) {
-      document.title= "No Available Blogs"
-    }else {
+    if (blogs.length <= 0 && !top) {
+      document.title = "No Available Blogs";
+    } else {
       document.title = top;
     }
   }, [top]);
@@ -30,8 +45,13 @@ export default function Blog() {
     titleRef.current.focus();
   }, []);
 
-  function removeBlog(i) {
-    setBlogs(blogs.filter((blog, index) => i !== index));
+  function removeBlog(index) {
+    // setBlogs(blogs.filter((blog, index) => i !== index));
+
+    dispatch({
+      type : "DELETE" ,
+      index : index
+    })
   }
 
   return (
@@ -61,7 +81,8 @@ export default function Blog() {
 
           {/* Row component to create a row for Text area field */}
           <Row label="Content">
-            <textarea required
+            <textarea
+              required
               className="input content"
               value={formData.content}
               onChange={(e) => {
