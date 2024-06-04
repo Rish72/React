@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
+import useLocalStorage from "./useLocalStorage";
 
-export default function Login(){
-   const [email,setEmail] = useState("");
-   const [password, setPassword] = useState("");  
-   useEffect(() => {
-    let email = localStorage.getItem("email");
-    if(email) setEmail(email)
-  }, [])
-   useEffect(() => {
-    localStorage.setItem("email", email)
-   }, [email]);
+export default function Login() {
+  const { email, setEmail } = useLocalStorage();
+  const [password, setPassword] = useState("");
 
-   
-    return(
-        <>
-        <h1>Login to the Portal!</h1>
-        <h3>Login</h3>
+  //  const [email,setEmail] = useState("");
+  //  useEffect(() => {
+  //   let email = localStorage.getItem("email");
+  //   if(email) setEmail(email)
+  // }, [])
+  //  useEffect(() => {
+  //   localStorage.setItem("email", email)
+  //  }, [email]);
+
+  return (
+    <>
+      <h1>Login to the Portal!</h1>
+      <h3>Login</h3>
       <input
         placeholder="Enter Email"
         value={email}
@@ -35,12 +37,12 @@ export default function Login(){
       <br />
       <button
         onClick={() => {
-          console.log("Form submitted")
+          console.log("Form submitted");
         }}
       >
         Submit
       </button>
       <br />
-        </>
-    )
+    </>
+  );
 }
