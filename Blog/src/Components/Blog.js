@@ -1,14 +1,17 @@
 //Blogging App using Hooks
 import { useState, useRef, useEffect, useReducer } from "react";
+import { db } from "../firebase.config.js";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 function blogReducer(state, action) {
-
-  switch(action.type){
-    case "ADD" : return [action.blog , ...state]
-    case "DELETE" : return state.filter((blog, index) => index !== action.index);
-    default : return []
+  switch (action.type) {
+    case "ADD":
+      return [action.blog, ...state];
+    case "DELETE":
+      return state.filter((blog, index) => index !== action.index);
+    default:
+      return [];
   }
-
 }
 export default function Blog() {
   const titleRef = useRef(null);
@@ -17,21 +20,6 @@ export default function Blog() {
   // const [blogs, setBlogs] = useState([]);
   const [blogs, dispatch] = useReducer(blogReducer, []);
   let [top, setTop] = useState(null);
-
-  //Passing the synthetic event as argument to stop refreshing the page on submit
-  function handleSubmit(e) {
-    e.preventDefault();
-    setTop((top = formData.title));
-    //setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
-
-    dispatch({
-      type: "ADD",
-      blog: { title: formData.title, content: formData.content },
-    });
-
-    setFormData({ title: "", content: "" });
-    titleRef.current.focus();
-  }
 
   useEffect(() => {
     if (blogs.length <= 0 && !top) {
@@ -45,13 +33,56 @@ export default function Blog() {
     titleRef.current.focus();
   }, []);
 
+  useEffect(() => {
+    async function getInitailData() {
+      const dataSnapshot = await getDocs(collection(db, "blogs"));
+
+      const blogsFromDb = dataSnapshot.docs.map((doc) => {
+        dispatch({
+          type: "ADD",
+          blog: {
+            id: doc.id,
+            ...doc.data(),
+          },
+          createdOn: new Date(),
+        });
+      });
+
+   
+    }
+    getInitailData();
+  }, []);
+
+  //Passing the synthetic event as argument to stop refreshing the page on submit
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setTop((top = formData.title));
+    //setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
+
+    // adding data into firebase
+    await addDoc(collection(db, "blogs"), {
+      title: formData.title,
+      content: formData.content,
+      addedOn: new Date(),
+    });
+
+    dispatch({
+      type: "ADD",
+      blog: { title: formData.title, content: formData.content },
+      createdOn: new Date(),
+    });
+
+    setFormData({ title: "", content: "" });
+    titleRef.current.focus();
+  }
+
   function removeBlog(index) {
     // setBlogs(blogs.filter((blog, index) => i !== index));
 
     dispatch({
-      type : "DELETE" ,
-      index : index
-    })
+      type: "DELETE",
+      index: index,
+    });
   }
 
   return (
